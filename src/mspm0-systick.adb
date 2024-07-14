@@ -64,13 +64,12 @@ package body MSPM0.SysTick is
    Ticks : Time := 0
       with Volatile, Atomic;
 
-   function Clock
-      return Time
+   procedure Get_Clock
+      (T : out Time)
    is
-      pragma SPARK_Mode (Off);
    begin
-      return Ticks;
-   end Clock;
+      T := Ticks;
+   end Get_Clock;
 
    procedure Delay_Until
       (T : Time)
