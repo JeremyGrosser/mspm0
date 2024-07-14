@@ -13,7 +13,7 @@ executables = ["test"]
 
 [[depends-on]]
 gnat_arm_elf = "^13"
-gnatprove = "^13.2.1"
+gnatprove = "^13"
 mspm0 = "*"
 
 [[pins]]

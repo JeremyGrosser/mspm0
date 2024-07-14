@@ -41,7 +41,7 @@ begin
    Console.Put_Line ("MSPM0 test console!");
 
    MSPM0.SysTick.Enable;
-   T := Clock;
+   Get_Clock (T);
    loop
       PA.DOUTTGL (0) := True;
       T := T + Milliseconds (250);
