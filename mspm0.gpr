@@ -1,0 +1,38 @@
+with "config/mspm0_config.gpr";
+project Mspm0 is
+
+   for Target use "arm-eabi";
+   for Languages use ("Ada", "C");
+   for Library_Name use "Mspm0";
+   for Library_Version use Project'Library_Name & ".so." & Mspm0_Config.Crate_Version;
+
+   for Source_Dirs use ("src/", "config/");
+   for Object_Dir use "obj/" & Mspm0_Config.Build_Profile;
+   for Create_Missing_Dirs use "True";
+   for Library_Dir use "lib";
+
+   type Library_Type_Type is ("relocatable", "static", "static-pic");
+   Library_Type : Library_Type_Type :=
+     external ("MSPM0_LIBRARY_TYPE", external ("LIBRARY_TYPE", "static"));
+   for Library_Kind use Library_Type;
+
+   package Compiler is
+      for Default_Switches ("Ada") use Mspm0_Config.Ada_Compiler_Switches;
+   end Compiler;
+
+   package Binder is
+      for Switches ("Ada") use (
+         "-minimal"
+      );
+   end Binder;
+
+   package Install is
+      for Artifacts (".") use ("share");
+   end Install;
+
+   Linker_Switches := (
+      "-Wl,-T," & Project'Project_Dir & "mspm0g3507.ld",
+      Project'Project_Dir & "src/startup_mspm0g3507_gcc.c"
+   );
+
+end Mspm0;

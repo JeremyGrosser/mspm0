@@ -1,0 +1,24 @@
+name = "test"
+description = ""
+version = "0.1.0-dev"
+
+authors = ["Jeremy Grosser"]
+maintainers = ["Jeremy Grosser <jeremy@synack.me>"]
+maintainers-logins = ["JeremyGrosser"]
+licenses = "BSD-3-Clause"
+website = ""
+tags = []
+
+executables = ["test"]
+
+[[depends-on]]
+gnat_arm_elf = "^14"
+hex_format = "~0.1.0"
+mspm0 = "*"
+
+[[pins]]
+mspm0 = { path='..' }
+
+[build-switches]
+development.optimization = ["-Og"]
+release.optimization = ["-gnatn2", "-Os"]
