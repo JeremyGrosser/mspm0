@@ -8,6 +8,3 @@ maintainers-logins = ["JeremyGrosser"]
 licenses = "BSD-3-Clause"
 website = ""
 tags = []
-
-[[depends-on]]
-gnat_arm_elf = ">=13"

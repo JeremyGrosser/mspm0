@@ -39,6 +39,7 @@ package body MSPM0.NVIC is
    end Clear_Pending;
 
    procedure Wait_For_Interrupt is
+      pragma SPARK_Mode (Off);
    begin
       System.Machine_Code.Asm ("wfi", Volatile => True);
    end Wait_For_Interrupt;

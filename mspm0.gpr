@@ -20,6 +20,7 @@ project Mspm0 is
 
    package Compiler is
       for Default_Switches ("Ada") use Mspm0_Config.Ada_Compiler_Switches;
+      for Local_Configuration_Pragmas use "gnat.adc";
    end Compiler;
 
    package Binder is
