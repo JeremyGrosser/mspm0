@@ -3,8 +3,10 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
+pragma Style_Checks ("M120");
+
 package MSPM0
-   with Pure, SPARK_Mode => On
+   with Pure
 is
    type UInt2 is mod 2 ** 2 with Size => 2;
    type UInt3 is mod 2 ** 3 with Size => 3;

@@ -12,13 +12,15 @@ tags = []
 executables = ["test"]
 
 [[depends-on]]
-gnat_arm_elf = "^14"
-hex_format = "~0.1.0"
+gnat_arm_elf = "^13"
 mspm0 = "*"
 
 [[pins]]
 mspm0 = { path='..' }
 
 [build-switches]
-development.optimization = ["-Og"]
+development.optimization = ["-Og", "-gnatwa"]
 release.optimization = ["-gnatn2", "-Os"]
+
+[[depends-on]]
+gnatprove = "^13.2.1"

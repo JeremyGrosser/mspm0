@@ -25,17 +25,8 @@ is
    procedure Put_Line
       (Line : String);
 
-   procedure Put_Hex
-      (N : UInt8);
-
-   procedure Put_Hex
-      (N : UInt16);
-
-   procedure Put_Hex
-      (N : UInt32);
-
-   function Data_Ready
-      return Boolean;
+   procedure Data_Ready
+      (Ready : out Boolean);
 
    procedure Get
       (Ch : out Character);

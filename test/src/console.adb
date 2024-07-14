@@ -3,28 +3,26 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
-pragma SPARK_Mode (Off);
 with MSPM0.Device; use MSPM0.Device;
 with MSPM0.GPIO; use MSPM0.GPIO;
 
-with Generic_Hex_Format;
-
 package body Console is
 
+   Mode : PINCM_Register :=
+      (WCOMP      => False,
+       WUEN       => False,
+       INV        => False,
+       HIZ1       => False,
+       DRV        => False,
+       HYSTEN     => False,
+       INENA      => False,
+       PIPU       => False,
+       PIPD       => False,
+       WAKESTAT   => False,
+       PC         => True,
+       PF         => 2);
+
    procedure Initialize is
-      Mode : PINCM_Register :=
-         (WCOMP      => False,
-          WUEN       => False,
-          INV        => False,
-          HIZ1       => False,
-          DRV        => False,
-          HYSTEN     => False,
-          INENA      => False,
-          PIPU       => False,
-          PIPD       => False,
-          WAKESTAT   => False,
-          PC         => True,
-          PF         => 2);
    begin
       --  PA10 UART0_TX
       --  PA11 UART0_RX
@@ -68,13 +66,16 @@ package body Console is
    procedure Put
       (Data : UInt8)
    is
+      TX_FIFO_Full, TX_FIFO_Empty : Boolean;
    begin
       loop
-         exit when not UART_0.STAT.TXFF;
+         TX_FIFO_Full := UART_0.STAT.TXFF;
+         exit when not TX_FIFO_Full;
       end loop;
       UART_0.TXDATA := UInt32 (Data);
       loop
-         exit when UART_0.STAT.TXFE;
+         TX_FIFO_Empty := UART_0.STAT.TXFE;
+         exit when TX_FIFO_Empty;
       end loop;
    end Put;
 
@@ -108,42 +109,26 @@ package body Console is
       New_Line;
    end Put_Line;
 
-   procedure Put_Hex
-      (N : UInt8)
+   procedure Data_Ready
+      (Ready : out Boolean)
    is
-      package Format is new Generic_Hex_Format (UInt8, Shift_Right);
    begin
-      Put (Format.Hex (N));
-   end Put_Hex;
-
-   procedure Put_Hex
-      (N : UInt16)
-   is
-      package Format is new Generic_Hex_Format (UInt16, Shift_Right);
-   begin
-      Put (Format.Hex (N));
-   end Put_Hex;
-
-   procedure Put_Hex
-      (N : UInt32)
-   is
-      package Format is new Generic_Hex_Format (UInt32, Shift_Right);
-   begin
-      Put (Format.Hex (N));
-   end Put_Hex;
-
-   function Data_Ready
-      return Boolean
-   is (not UART_0.STAT.RXFE);
+      Ready := UART_0.STAT.RXFE;
+      Ready := not Ready;
+   end Data_Ready;
 
    procedure Get
       (Ch : out Character)
    is
+      RX_FIFO_Empty : Boolean;
+      Data : UInt8;
    begin
-      if UART_0.STAT.RXFE then
+      RX_FIFO_Empty := UART_0.STAT.RXFE;
+      if RX_FIFO_Empty then
          Ch := ASCII.NUL;
       else
-         Ch := Character'Val (Natural (UART_0.RXDATA.DATA));
+         Data := UART_0.RXDATA.DATA;
+         Ch := Character'Val (Natural (Data));
       end if;
    end Get;
 end Console;

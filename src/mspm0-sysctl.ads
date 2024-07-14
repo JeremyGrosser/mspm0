@@ -3,8 +3,10 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
+pragma Style_Checks ("M120");
+
 package MSPM0.SYSCTL
-   with Preelaborate
+   with Pure
 is
    type SYSOSCCFG_FREQ_Field is (SYSOSC_32MHz, SYSOSC_4MHz, SYSOSC_User)
       with Size => 2;

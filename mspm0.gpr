@@ -2,6 +2,8 @@ with "config/mspm0_config.gpr";
 project Mspm0 is
 
    for Target use "arm-eabi";
+   for Runtime ("Ada") use "light-cortex-m0p";
+
    for Languages use ("Ada", "C");
    for Library_Name use "Mspm0";
    for Library_Version use Project'Library_Name & ".so." & Mspm0_Config.Crate_Version;

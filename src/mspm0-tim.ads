@@ -3,8 +3,10 @@
 --
 --  SPDX-License-Identifier: BSD-3-Clause
 --
+pragma Style_Checks ("M120");
+
 package MSPM0.TIM
-   with Preelaborate
+   with Pure
 is
 
    type IIDX_STAT_Field is

@@ -4,7 +4,7 @@
 --  SPDX-License-Identifier: BSD-3-Clause
 --
 package MSPM0.MATHACL
-   with Preelaborate
+   with Pure
 is
    type CTL_FUNC_Field is
       (NOOP, SINCOS, ATAN2, DIV, SQRT, MUL32, SQ32, MUL64, MAC, SAC)
