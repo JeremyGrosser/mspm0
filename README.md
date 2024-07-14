@@ -9,8 +9,6 @@ This is not a complete library of all registers, just the ones I've needed to ac
 
 I have only tested this code on MSPM0G3507 but all of the MSPM0 family chips share very similar register layouts and new devices should be easy to add by creating a [device file](src/mspm0-g3507.ads) with instances of the supported peripherals and their base addresses.
 
-The ARM SysTick and NVIC specs are not specific to MSPM0 but are included here for convenience.
-
 Code size can be reduced further by forking [bare_runtime](https://gihtub.com/JeremyGrosser/bare_runtime) and removing support for Semihosting, Floating point 'Image, and simplifying the Last_Chance_Handler.
 
 Upstream OpenOCD does not have support for MSPM0 yet. I've implemented rudimentary flash support on my [mspm0 branch](https://github.com/JeremyGrosser/openocd/tree/mspm0). The TI Launchpad boards are supported by both the CMSIS-DAP and XDS110 interface drivers.
