@@ -1,4 +1,4 @@
-# MSPM0 support for Ada
+# MSPM0 support for Ada/SPARK
 This library is provided under the BSD-3-Clause license. No warranty or support should be expected. Use at your own risk.
 
 TI provides register descriptions in a proprietary .ccxml format with Code Composer Studio. While we can generate [Ada type definitions from ccxml](https://github.com/JeremyGrosser/ccs2ada), the structure is often difficult to comprehend and lacks detail provided in the datasheets. Instead, this library uses hand written type definitions for registers.
