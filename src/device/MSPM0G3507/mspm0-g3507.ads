@@ -6,6 +6,8 @@
 with System;
 
 with MSPM0.SYSCTL;
+with MSPM0.WWDT;
+with MSPM0.CPUSS;
 with MSPM0.GPIO;
 with MSPM0.MATHACL;
 with MSPM0.I2C;
@@ -15,42 +17,48 @@ with MSPM0.TIM;
 package MSPM0.G3507
    with Preelaborate
 is
-   SYSCTL : MSPM0.SYSCTL.SYSCTL_Peripheral
+   SYSCTL   : aliased MSPM0.SYSCTL.SYSCTL_Peripheral
       with Import, Address => System'To_Address (16#400A_F000#);
-   PA : MSPM0.GPIO.GPIO_Peripheral
+   PA       : aliased MSPM0.GPIO.GPIO_Peripheral
       with Import, Address => System'To_Address (16#400A_0000#);
-   PB : MSPM0.GPIO.GPIO_Peripheral
+   PB       : aliased MSPM0.GPIO.GPIO_Peripheral
       with Import, Address => System'To_Address (16#400A_2000#);
-   MATHACL : MSPM0.MATHACL.MATHACL_Peripheral
+   MATHACL  : aliased MSPM0.MATHACL.MATHACL_Peripheral
       with Import, Address => System'To_Address (16#4041_0000#);
-   PINCM : MSPM0.GPIO.PINCM_Array
+   PINCM    : aliased MSPM0.GPIO.PINCM_Array
       with Import, Address => System'To_Address (16#4042_8004#);
+   WWDT0    : aliased MSPM0.WWDT.WWDT_Peripheral
+      with Import, Address => System'To_Address (16#4008_0000#);
+   WWDT1    : aliased MSPM0.WWDT.WWDT_Peripheral
+      with Import, Address => System'To_Address (16#4008_2000#);
+   CPUSS    : aliased MSPM0.CPUSS.CPUSS_Peripheral
+      with Import, Address => System'To_Address (16#4040_0000#);
 
-   I2C_0 : MSPM0.I2C.I2C_Peripheral
+   I2C_0 : aliased MSPM0.I2C.I2C_Peripheral
       with Import, Address => System'To_Address (16#400F_0000#);
-   I2C_1 : MSPM0.I2C.I2C_Peripheral
+   I2C_1 : aliased MSPM0.I2C.I2C_Peripheral
       with Import, Address => System'To_Address (16#400F_2000#);
 
-   UART_0 : MSPM0.UART.UART_Peripheral
+   UART_0 : aliased MSPM0.UART.UART_Peripheral
       with Import, Address => System'To_Address (16#4010_8000#);
-   UART_1 : MSPM0.UART.UART_Peripheral
+   UART_1 : aliased MSPM0.UART.UART_Peripheral
       with Import, Address => System'To_Address (16#4010_0000#);
-   UART_2 : MSPM0.UART.UART_Peripheral
+   UART_2 : aliased MSPM0.UART.UART_Peripheral
       with Import, Address => System'To_Address (16#4010_2000#);
 
-   TIMG0 : MSPM0.TIM.TIM_Peripheral
+   TIMG0 : aliased MSPM0.TIM.TIM_Peripheral
       with Import, Address => System'To_Address (16#4008_4000#);
-   TIMG8 : MSPM0.TIM.TIM_Peripheral
+   TIMG8 : aliased MSPM0.TIM.TIM_Peripheral
       with Import, Address => System'To_Address (16#4009_0000#);
-   TIMA0 : MSPM0.TIM.TIM_Peripheral
+   TIMA0 : aliased MSPM0.TIM.TIM_Peripheral
       with Import, Address => System'To_Address (16#4086_0000#);
-   TIMA1 : MSPM0.TIM.TIM_Peripheral
+   TIMA1 : aliased MSPM0.TIM.TIM_Peripheral
       with Import, Address => System'To_Address (16#4086_2000#);
-   TIMG6 : MSPM0.TIM.TIM_Peripheral
+   TIMG6 : aliased MSPM0.TIM.TIM_Peripheral
       with Import, Address => System'To_Address (16#4086_8000#);
-   TIMG7 : MSPM0.TIM.TIM_Peripheral
+   TIMG7 : aliased MSPM0.TIM.TIM_Peripheral
       with Import, Address => System'To_Address (16#4086_A000#);
-   TIMG12 : MSPM0.TIM.TIM_Peripheral
+   TIMG12 : aliased MSPM0.TIM.TIM_Peripheral
       with Import, Address => System'To_Address (16#4087_0000#);
 
    FACTORY_SYSPLLPARAM0_48M : UInt32
@@ -121,4 +129,31 @@ is
       PB26 : constant := 57;
       PB27 : constant := 58;
    end Mux;
+
+   package IRQ is
+      INT_GROUP0  : constant := 0;
+      INT_GROUP1  : constant := 1;
+      TIMG8       : constant := 2;
+      UART3       : constant := 3;
+      ADC0        : constant := 4;
+      ADC1        : constant := 5;
+      CANFD0      : constant := 6;
+      DAC0        : constant := 7;
+      SPI0        : constant := 9;
+      SPI1        : constant := 10;
+      UART1       : constant := 13;
+      UART2       : constant := 14;
+      UART0       : constant := 15;
+      TIMG0       : constant := 16;
+      TIMG6       : constant := 17;
+      TIMA0       : constant := 18;
+      TIMA1       : constant := 19;
+      TIMG7       : constant := 20;
+      TIMG12      : constant := 21;
+      I2C0        : constant := 24;
+      I2C1        : constant := 25;
+      AES         : constant := 28;
+      RTC         : constant := 29;
+      DMA         : constant := 30;
+   end IRQ;
 end MSPM0.G3507;

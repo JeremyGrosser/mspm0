@@ -12,8 +12,8 @@ is
 
    type Time is mod 2 ** 32;
 
-   procedure Get_Clock
-      (T : out Time);
+   function Clock
+      return Time;
 
    function Milliseconds
       (Ms : Natural)

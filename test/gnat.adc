@@ -1,4 +1,4 @@
-pragma SPARK_Mode (On);
+--  ZFP
 pragma Restrictions (No_Exception_Propagation);
 pragma Restrictions (No_Exception_Registration);
 pragma Restrictions (No_Implicit_Dynamic_Code);
@@ -6,4 +6,7 @@ pragma Restrictions (No_Finalization);
 pragma Restrictions (No_Tasking);
 pragma Discard_Names;
 
-pragma Style_Checks ("M120");
+--  -nostdlib cannot use the secondary stack
+pragma Restrictions (No_Secondary_Stack);
+
+pragma Assertion_Policy (Check);

@@ -12,13 +12,19 @@ tags = []
 executables = ["test"]
 
 [[depends-on]]
-gnat_arm_elf = "^13"
-gnatprove = "^13"
 mspm0 = "*"
+bare_runtime = "~0.1.0"
 
 [[pins]]
 mspm0 = { path='..' }
+bare_runtime = { url='https://github.com/JeremyGrosser/bare_runtime.git', branch='no_semihosting' }
+
+[configuration.values]
+mspm0.Device = "MSPM0G3507"
+
+[gpr-set-externals]
+BARE_RUNTIME_SWITCHES = "-mcpu=cortex-m0plus"
 
 [build-switches]
-development.optimization = ["-Og", "-gnatwa"]
-release.optimization = ["-gnatn2", "-Os"]
+development.optimization = ["-Og"]
+release.optimization = ["-gnatn2", "-gnatp", "-O2"]

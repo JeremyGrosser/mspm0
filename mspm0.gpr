@@ -8,7 +8,14 @@ project Mspm0 is
    for Library_Name use "Mspm0";
    for Library_Version use Project'Library_Name & ".so." & Mspm0_Config.Crate_Version;
 
-   for Source_Dirs use ("src/", "config/");
+   Device_Path := Project'Project_Dir & "src/device/" & Mspm0_Config.Device;
+
+   for Source_Dirs use (
+      Device_Path,
+      "src/",
+      "config/"
+   );
+
    for Object_Dir use "obj/" & Mspm0_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Library_Dir use "lib";
@@ -20,13 +27,10 @@ project Mspm0 is
 
    package Compiler is
       for Default_Switches ("Ada") use Mspm0_Config.Ada_Compiler_Switches;
-      for Local_Configuration_Pragmas use "gnat.adc";
    end Compiler;
 
    package Binder is
-      for Switches ("Ada") use (
-         "-minimal"
-      );
+      for Switches ("Ada") use ("-minimal");
    end Binder;
 
    package Install is
@@ -34,8 +38,9 @@ project Mspm0 is
    end Install;
 
    Linker_Switches := (
-      "-Wl,-T," & Project'Project_Dir & "mspm0g3507.ld",
-      Project'Project_Dir & "src/startup_mspm0g3507_gcc.c"
+      "-Wl,-L" & Device_Path,
+      "-Wl,-Tflash.ld",
+      Device_Path & "/startup.c"
    );
 
 end Mspm0;

@@ -39,9 +39,17 @@ package body MSPM0.NVIC is
    end Clear_Pending;
 
    procedure Wait_For_Interrupt is
-      pragma SPARK_Mode (Off);
    begin
       System.Machine_Code.Asm ("wfi", Volatile => True);
    end Wait_For_Interrupt;
 
+   procedure Enable_All is
+   begin
+      System.Machine_Code.Asm ("cpsie i", Volatile => True);
+   end Enable_All;
+
+   procedure Disable_All is
+   begin
+      System.Machine_Code.Asm ("cpsid i", Volatile => True);
+   end Disable_All;
 end MSPM0.NVIC;

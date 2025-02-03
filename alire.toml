@@ -8,3 +8,6 @@ maintainers-logins = ["JeremyGrosser"]
 licenses = "BSD-3-Clause"
 website = ""
 tags = []
+
+[configuration.variables]
+Device = {type = "Enum", values = ["MSPM0G3507", "MSPM0L1306"], default="MSPM0G3507"}

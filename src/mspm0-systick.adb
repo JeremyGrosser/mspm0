@@ -64,17 +64,13 @@ package body MSPM0.SysTick is
    Ticks : Time := 0
       with Volatile, Atomic;
 
-   procedure Get_Clock
-      (T : out Time)
-   is
-   begin
-      T := Ticks;
-   end Get_Clock;
+   function Clock
+      return Time
+   is (Ticks);
 
    procedure Delay_Until
       (T : Time)
    is
-      pragma SPARK_Mode (Off);
       Now : Time;
    begin
       loop
@@ -90,7 +86,6 @@ package body MSPM0.SysTick is
       with Export, Convention => C, External_Name => "SysTick_Handler";
 
    procedure SysTick_Handler is
-      pragma SPARK_Mode (Off);
    begin
       Ticks := Ticks + 1;
       SCB_ICSR := SCB_ICSR_PENDSTCLR;

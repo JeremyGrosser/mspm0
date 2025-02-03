@@ -8,13 +8,12 @@ pragma Style_Checks ("M120");
 package MSPM0.I2C
    with Pure
 is
-
    type MSA_Register is record
       MMODE : Boolean := False;
       SADDR : UInt9 := 0;
       DIR   : Boolean := False;
    end record
-      with Volatile_Full_Access, Effective_Writes, Async_Readers, Object_Size => 32;
+      with Volatile_Full_Access, Effective_Writes, Async_Readers, Async_Writers, Object_Size => 32;
    for MSA_Register use record
       MMODE at 0 range 15 .. 15;
       SADDR at 0 range 1 .. 10;
@@ -129,6 +128,152 @@ is
       RXFIFOCNT   at 0 range 0 .. 3;
    end record;
 
+   type IIDX_STAT_Field is
+      (No_Interrupt,
+       MRXDONE,
+       MTXDONE,
+       MRXFIFOTRG,
+       MTXFIFOTRG,
+       MRXFIFOFULL,
+       MTXEMPTY,
+       MNACK,
+       MSTART,
+       MSTOP,
+       MARBLOST,
+       MDMA_DONE_TX,
+       MDMA_DONE_RX,
+       MPEC_RX_ERR,
+       TIMEOUTA,
+       TIMEOUTB,
+       SRXDONE,
+       STXDONE,
+       SRXFIFOTRG,
+       STXFIFOTRG,
+       SRXFIFOFULL,
+       STXEMPTY,
+       SSTART,
+       SSTOP,
+       SGENCALL,
+       SDMA_DONE_TX,
+       SDMA_DONE_RX,
+       SPEC_RX_ERR,
+       STX_UNFL,
+       SRX_OVFL,
+       SARBLOST,
+       INTR_OVFL)
+   with Size => 8;
+   for IIDX_STAT_Field use
+      (No_Interrupt  => 0,
+       MRXDONE       => 1,
+       MTXDONE       => 2,
+       MRXFIFOTRG    => 3,
+       MTXFIFOTRG    => 4,
+       MRXFIFOFULL   => 5,
+       MTXEMPTY      => 6,
+       MNACK         => 8,
+       MSTART        => 9,
+       MSTOP         => 10,
+       MARBLOST      => 11,
+       MDMA_DONE_TX  => 12,
+       MDMA_DONE_RX  => 13,
+       MPEC_RX_ERR   => 14,
+       TIMEOUTA      => 15,
+       TIMEOUTB      => 16,
+       SRXDONE       => 17,
+       STXDONE       => 18,
+       SRXFIFOTRG    => 19,
+       STXFIFOTRG    => 20,
+       SRXFIFOFULL   => 21,
+       STXEMPTY      => 22,
+       SSTART        => 23,
+       SSTOP         => 24,
+       SGENCALL      => 25,
+       SDMA_DONE_TX  => 26,
+       SDMA_DONE_RX  => 27,
+       SPEC_RX_ERR   => 28,
+       STX_UNFL      => 29,
+       SRX_OVFL      => 30,
+       SARBLOST      => 31,
+       INTR_OVFL     => 32);
+
+   type IIDX_Register is record
+      STAT : IIDX_STAT_Field;
+   end record
+      with Volatile_Full_Access, Async_Writers, Object_Size => 32;
+   for IIDX_Register use record
+      STAT at 0 range 0 .. 7;
+   end record;
+
+   type INT_Register is record
+      INTR_OVFL      : Boolean;
+      SARBLOST       : Boolean;
+      SRX_OVFL       : Boolean;
+      STX_UNFL       : Boolean;
+      SPEC_RX_ERR    : Boolean;
+      SDMA_DONE_RX   : Boolean;
+      SDMA_DONE_TX   : Boolean;
+      SGENCALL       : Boolean;
+      SSTOP          : Boolean;
+      SSTART         : Boolean;
+      STXEMPTY       : Boolean;
+      SRXFIFOFULL    : Boolean;
+      STXFIFOTRG     : Boolean;
+      SRXFIFOTRG     : Boolean;
+      STXDONE        : Boolean;
+      SRXDONE        : Boolean;
+      TIMEOUTB       : Boolean;
+      TIMEOUTA       : Boolean;
+      MPEC_RX_ERR    : Boolean;
+      MDMA_DONE_RX   : Boolean;
+      MDMA_DONE_TX   : Boolean;
+      MARBLOST       : Boolean;
+      MSTOP          : Boolean;
+      MSTART         : Boolean;
+      MNACK          : Boolean;
+      MTXEMPTY       : Boolean;
+      MRXFIFOFULL    : Boolean;
+      MTXFIFOTRG     : Boolean;
+      MRXFIFOTRG     : Boolean;
+      MTXDONE        : Boolean;
+      MRXDONE        : Boolean;
+   end record
+      with Volatile_Full_Access,
+           Async_Writers,
+           Object_Size => 32;
+   for INT_Register use record
+      INTR_OVFL      at 0 range 31 .. 31;
+      SARBLOST       at 0 range 30 .. 30;
+      SRX_OVFL       at 0 range 29 .. 29;
+      STX_UNFL       at 0 range 28 .. 28;
+      SPEC_RX_ERR    at 0 range 27 .. 27;
+      SDMA_DONE_RX   at 0 range 26 .. 26;
+      SDMA_DONE_TX   at 0 range 25 .. 25;
+      SGENCALL       at 0 range 24 .. 24;
+      SSTOP          at 0 range 23 .. 23;
+      SSTART         at 0 range 22 .. 22;
+      STXEMPTY       at 0 range 21 .. 21;
+      SRXFIFOFULL    at 0 range 20 .. 20;
+      STXFIFOTRG     at 0 range 19 .. 19;
+      SRXFIFOTRG     at 0 range 18 .. 18;
+      STXDONE        at 0 range 17 .. 17;
+      SRXDONE        at 0 range 16 .. 16;
+      TIMEOUTB       at 0 range 15 .. 15;
+      TIMEOUTA       at 0 range 14 .. 14;
+      MPEC_RX_ERR    at 0 range 13 .. 13;
+      MDMA_DONE_RX   at 0 range 12 .. 12;
+      MDMA_DONE_TX   at 0 range 11 .. 11;
+      MARBLOST       at 0 range 10 .. 10;
+      MSTOP          at 0 range 9 .. 9;
+      MSTART         at 0 range 8 .. 8;
+      MNACK          at 0 range 7 .. 7;
+      MTXEMPTY       at 0 range 5 .. 5;
+      MRXFIFOFULL    at 0 range 4 .. 4;
+      MTXFIFOTRG     at 0 range 3 .. 3;
+      MRXFIFOTRG     at 0 range 2 .. 2;
+      MTXDONE        at 0 range 1 .. 1;
+      MRXDONE        at 0 range 0 .. 0;
+   end record;
+
    type I2C_Peripheral is record
       PWREN    : UInt32;
       RSTCTL   : UInt32;
@@ -144,6 +289,11 @@ is
       MCR      : MCR_Register;
       MFIFOCTL : MFIFOCTL_Register;
       MFIFOSR  : MFIFOSR_Register;
+      IMASK    : INT_Register;
+      RIS      : INT_Register;
+      MIS      : INT_Register;
+      ISET     : INT_Register;
+      ICLR     : INT_Register;
    end record
       with Volatile;
 
@@ -152,6 +302,11 @@ is
       RSTCTL   at 16#0804# range 0 .. 31;
       CLKDIV   at 16#1000# range 0 .. 31;
       CLKSEL   at 16#1004# range 0 .. 31;
+      IMASK    at 16#1028# range 0 .. 31;
+      RIS      at 16#1030# range 0 .. 31;
+      MIS      at 16#1038# range 0 .. 31;
+      ISET     at 16#1040# range 0 .. 31;
+      ICLR     at 16#1048# range 0 .. 31;
       PDBGCTL  at 16#1018# range 0 .. 31;
       MSA      at 16#1210# range 0 .. 31;
       MCTR     at 16#1214# range 0 .. 31;
@@ -163,5 +318,4 @@ is
       MFIFOCTL at 16#1238# range 0 .. 31;
       MFIFOSR  at 16#123C# range 0 .. 31;
    end record;
-
 end MSPM0.I2C;

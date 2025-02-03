@@ -8,7 +8,6 @@ pragma Style_Checks ("M120");
 package MSPM0.UART
    with Pure
 is
-
    type UART_CTL0_Register is record
       MSBFIRST    : Boolean := False;
       MAJVOTE     : Boolean := False;
