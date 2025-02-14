@@ -44,7 +44,9 @@ package body Tests.SRAM is
    begin
       Result := Fail;
       for I in SRAM'Range loop
-         if SRAM (I)'Address /= Tmp'Address then
+         if SRAM (I)'Address /= Tmp'Address and then
+            SRAM (I)'Address /= Save'Address
+         then
             Save := SRAM (I);
             for Pattern of Patterns loop
                SRAM (I) := Pattern;
