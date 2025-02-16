@@ -11,6 +11,7 @@ with MSPM0.CPUSS;
 with MSPM0.GPIO;
 with MSPM0.UART;
 with MSPM0.TIM;
+with MSPM0.ADC;
 
 package MSPM0.L1306
    with Preelaborate
@@ -39,6 +40,8 @@ is
       with Import, Address => System'To_Address (16#4008_8000#);
    TIMG4 : aliased MSPM0.TIM.TIM_Peripheral
       with Import, Address => System'To_Address (16#4008_C000#);
+   ADC0  : aliased MSPM0.ADC.ADC_Peripheral
+      with Import, Address => System'To_Address (16#4000_4000#);
 
    package Mux is
       PA0 : constant := 1;
