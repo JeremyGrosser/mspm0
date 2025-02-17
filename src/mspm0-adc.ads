@@ -89,6 +89,18 @@ is
    type MEMRES_Array is array (0 .. 17) of UInt16
       with Component_Size => 32;
 
+   type STATUS_Register is record
+      ASCACT      : Boolean;
+      REFBUFRDY   : Boolean;
+      BUSY        : Boolean;
+   end record
+      with Volatile_Full_Access, Async_Writers, Object_Size => 32;
+   for STATUS_Register use record
+      ASCACT      at 0 range 2 .. 2;
+      REFBUFRDY   at 0 range 1 .. 1;
+      BUSY        at 0 range 0 .. 0;
+   end record;
+
    type ADC_Peripheral is record
       PWREN    : UInt32;
       RSTCTL   : UInt32;
@@ -96,9 +108,12 @@ is
       CTL1     : CTL1_Register;
       CTL2     : CTL2_Register;
       CTL3     : CTL3_Register;
+      SCOMP0   : UInt8;
+      SCOMP1   : UInt8;
       ASCRES   : UInt16;
       MEMCTL   : MEMCTL_Array;
       MEMRES   : MEMRES_Array;
+      STATUS   : STATUS_Register;
    end record
       with Volatile, Effective_Writes, Async_Readers, Async_Writers;
    for ADC_Peripheral use record
@@ -108,8 +123,11 @@ is
       CTL1     at 16#1104# range 0 .. 31;
       CTL2     at 16#1108# range 0 .. 31;
       CTL3     at 16#110C# range 0 .. 31;
+      SCOMP0   at 16#1114# range 0 .. 7;
+      SCOMP1   at 16#1118# range 0 .. 7;
       ASCRES   at 16#1170# range 0 .. 15;
       MEMCTL   at 16#1180# range 0 .. 575;
       MEMRES   at 16#1280# range 0 .. 575;
+      STATUS   at 16#1340# range 0 .. 31;
    end record;
 end MSPM0.ADC;
