@@ -16,6 +16,7 @@ is
    type UInt7 is mod 2 ** 7 with Size => 7;
    type UInt8 is mod 2 ** 8 with Object_Size => 8;
    type UInt9 is mod 2 ** 9 with Size => 9;
+   type UInt10 is mod 2 ** 10 with Size => 10;
    type UInt12 is mod 2 ** 12 with Size => 12;
    type UInt16 is mod 2 ** 16 with Size => 16;
    type UInt22 is mod 2 ** 22 with Size => 22;

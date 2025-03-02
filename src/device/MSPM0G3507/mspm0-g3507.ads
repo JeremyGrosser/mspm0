@@ -14,6 +14,7 @@ with MSPM0.I2C;
 with MSPM0.UART;
 with MSPM0.TIM;
 with MSPM0.ADC;
+with MSPM0.VREF;
 
 package MSPM0.G3507
    with Preelaborate
@@ -38,6 +39,8 @@ is
       with Import, Address => System'To_Address (16#4000_0000#);
    ADC1     : aliased MSPM0.ADC.ADC_Peripheral
       with Import, Address => System'To_Address (16#4000_2000#);
+   VREF     : aliased MSPM0.VREF.VREF_Peripheral
+      with Import, Address => System'To_Address (16#4003_0000#);
 
    I2C_0 : aliased MSPM0.I2C.I2C_Peripheral
       with Import, Address => System'To_Address (16#400F_0000#);

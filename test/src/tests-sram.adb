@@ -7,8 +7,8 @@ with System.Machine_Code;
 with System;
 
 package body Tests.SRAM is
-   SRAM_BASE : constant := 16#2020_0000#; --  ECC bypass alias
-   SRAM_SIZE : constant := 32 * 1024;
+   SRAM_BASE : constant := 16#2000_0000#; --  ECC bypass alias
+   SRAM_SIZE : constant := 4096;
 
    type UInt32 is mod 2 ** 32 with Size => 32;
    type UInt32_Array is array (Positive range <>) of UInt32
