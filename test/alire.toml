@@ -14,6 +14,7 @@ executables = ["test"]
 [[depends-on]]
 mspm0 = "*"
 bare_runtime = "~0.1.0"
+gnat_arm_elf = "^14.2.1"
 
 [[pins]]
 mspm0 = { path='..' }
