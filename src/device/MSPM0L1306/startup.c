@@ -196,12 +196,25 @@ void Reset_Handler(void)
     HardFault_Handler();
 }
 
-/* This is the code that gets called when the processor receives an unexpected  */
-/* interrupt.  This simply enters an infinite loop, preserving the system state */
-/* for examination by a debugger.                                               */
+#define SCB_BASE                (0xE000E000UL + 0x0D00UL)                    /* System Control Block Base Address */
+#define SCB_AIRCR               (*(volatile uint32_t *)(SCB_BASE + 0x00CUL)) /* Application Interrupt and Reset Control Register */
+#define SCB_AIRCR_VECTKEY_POS   16                                        /* Vector Key Position */
+#define SCB_AIRCR_VECTKEY_MASK  (0xFFFFUL << SCB_AIRCR_VECTKEY_POS)       /* Vector Key Mask */
+#define SCB_AIRCR_VECTKEY       (0x5FAUL << SCB_AIRCR_VECTKEY_POS)        /* Vector Key */
+#define SCB_AIRCR_SYSRESETREQ   (1UL << 2)                                /* System Reset Request */
+
 void Default_Handler(void)
 {
-    /* Enter an infinite loop. */
+    // ensure all memory writes are complete
+    __asm volatile("dsb");
+
+    // break if a debugger is attached
+    __asm volatile("bkpt #1");
+
+    // reset
+    SCB_AIRCR = SCB_AIRCR_VECTKEY | SCB_AIRCR_SYSRESETREQ;
+
+    // wait for reset
     while(1)
     {
     }
