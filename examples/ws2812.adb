@@ -32,7 +32,7 @@ package body WS2812 is
       TIMG.PWREN := MSPM0.PWREN_ENABLE;
       TIMG.RSTCTL := MSPM0.RSTCTL_RESET;
 
-      TIMG.ODIS := (others => True);   --  disable outputs
+      TIMG.ODIS := (others => True);
       TIMG.CLKSEL := (SEL => MSPM0.BUSCLK);
       TIMG.CTRCTL :=
          (CVAE       => 0,
@@ -72,7 +72,8 @@ package body WS2812 is
    procedure Init_DMA is
       P : MSPM0.DMA.DMA_Peripheral renames MSPM0.Device.DMA;
    begin
-      P.FSUB_0 := 1;     --  Subscribe Generic event channel 1 (TIMG LOAD)
+      --  Subscribe Generic event channel 1 (TIMG LOAD)
+      P.FSUB_0 := 1;
 
       P.DMATCTL (Channel) :=
          (DMATINT => False,
@@ -147,6 +148,7 @@ package body WS2812 is
 
    procedure DMA_IRQHandler is
    begin
+      --  DMA complete, stop timer, idle low (ZCOND)
       TIMG.CTRCTL.EN := False;
       TIMG.CTR := (CCTR => 0);
    end DMA_IRQHandler;
