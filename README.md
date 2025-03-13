@@ -11,6 +11,4 @@ I have only tested this code on MSPM0G3507 but all of the MSPM0 family chips sha
 
 Code size can be reduced further by forking [bare_runtime](https://gihtub.com/JeremyGrosser/bare_runtime) and removing support for Semihosting, Floating point 'Image, and simplifying the Last_Chance_Handler.
 
-Upstream OpenOCD does not have support for MSPM0 yet. I've implemented rudimentary flash support on my [mspm0 branch](https://github.com/JeremyGrosser/openocd/tree/mspm0). The TI Launchpad boards are supported by both the CMSIS-DAP and XDS110 interface drivers.
-
-Better and more complete OpenOCD support for MSPM0 is [in review on openocd gerrit](https://review.openocd.org/c/openocd/+/8384).
+[OpenOCD supports mspm0](https://review.openocd.org/c/openocd/+/8384). The Launchpad boards include an XDS110 debug adapter and I've also successfully used a RP2040 Picoprobe with the `interface/cmsis-dap.cfg` script.
