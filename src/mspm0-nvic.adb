@@ -7,15 +7,19 @@ with System.Machine_Code;
 with System;
 
 package body MSPM0.NVIC is
+   pragma Suppress (All_Checks);
 
    type Interrupt_Mask is array (IRQ) of Boolean
       with Component_Size => 1, Size => 32;
 
+   ISER : Interrupt_Mask
+      with Import, Address => System'To_Address (16#E000_E100#);
+   ICPR : Interrupt_Mask
+      with Import, Address => System'To_Address (16#E000_E280#);
+
    procedure Enable
       (Interrupt : IRQ)
    is
-      ISER : Interrupt_Mask
-         with Import, Address => System'To_Address (16#E000_E100#);
    begin
       ISER (Interrupt) := True;
    end Enable;
@@ -23,8 +27,6 @@ package body MSPM0.NVIC is
    procedure Disable
       (Interrupt : IRQ)
    is
-      ISER : Interrupt_Mask
-         with Import, Address => System'To_Address (16#E000_E100#);
    begin
       ISER (Interrupt) := False;
    end Disable;
@@ -32,8 +34,6 @@ package body MSPM0.NVIC is
    procedure Clear_Pending
       (Interrupt : IRQ)
    is
-      ICPR : Interrupt_Mask
-         with Import, Address => System'To_Address (16#E000_E280#);
    begin
       ICPR (Interrupt) := True;
    end Clear_Pending;
