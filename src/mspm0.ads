@@ -43,7 +43,7 @@ is
    type UInt8_Array is array (Natural range <>) of UInt8
       with Component_Size => 8;
 
-   RSTCTL_RESET  : constant UInt32 := 16#B100_0002#;
+   RSTCTL_RESET  : constant UInt32 := 16#B100_0003#;
    PWREN_ENABLE  : constant UInt32 := 16#2600_0001#;
    PWREN_DISABLE : constant UInt32 := 16#2600_0000#;
 
