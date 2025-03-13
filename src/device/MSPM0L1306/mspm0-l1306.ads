@@ -13,6 +13,7 @@ with MSPM0.UART;
 with MSPM0.TIM;
 with MSPM0.ADC;
 with MSPM0.VREF;
+with MSPM0.DMA;
 
 package MSPM0.L1306
    with Preelaborate
@@ -27,6 +28,8 @@ is
       with Import, Address => System'To_Address (16#4008_0000#);
    CPUSS    : aliased MSPM0.CPUSS.CPUSS_Peripheral
       with Import, Address => System'To_Address (16#4040_0000#);
+   DMA      : aliased MSPM0.DMA.DMA_Peripheral
+      with Import, Address => System'To_Address (16#4042_A000#);
 
    UART_0 : aliased MSPM0.UART.UART_Peripheral
       with Import, Address => System'To_Address (16#4010_8000#);

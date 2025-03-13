@@ -257,6 +257,10 @@ is
    end record;
 
    type TIM_Peripheral is record
+      FSUB_0      : UInt32;
+      FSUB_1      : UInt32;
+      FPUB_0      : UInt32;
+      FPUB_1      : UInt32;
       PWREN       : UInt32;
       RSTCTL      : UInt32;
       CLKDIV      : CLKDIV_Register;
@@ -297,6 +301,10 @@ is
       with Volatile;
 
    for TIM_Peripheral use record
+      FSUB_0      at 16#0400# range 0 .. 31;
+      FSUB_1      at 16#0404# range 0 .. 31;
+      FPUB_0      at 16#0444# range 0 .. 31;
+      FPUB_1      at 16#0448# range 0 .. 31;
       PWREN       at 16#0800# range 0 .. 31;
       RSTCTL      at 16#0804# range 0 .. 31;
       CLKDIV      at 16#1000# range 0 .. 31;
