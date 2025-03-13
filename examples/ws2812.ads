@@ -13,7 +13,9 @@
 --
 with MSPM0; use MSPM0;
 
-package WS2812 is
+package WS2812
+   with Preelaborate
+is
    type RGB is record
       R, G, B : UInt8 := 0;
    end record;

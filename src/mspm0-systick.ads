@@ -13,11 +13,13 @@ is
    type Time is mod 2 ** 32;
 
    function Clock
-      return Time;
+      return Time
+   with Inline_Always;
 
    function Milliseconds
       (Ms : Natural)
-      return Time;
+      return Time
+   with Inline_Always;
 
    procedure Delay_Until
       (T : Time);

@@ -24,9 +24,18 @@ package body WS2812 is
       use MSPM0.Device;
    begin
       MSPM0.Device.PINCM (Pin_Mux) :=
-         (PF => 2,
-          PC => True,
-          others => <>);
+         (WCOMP      => False,
+          WUEN       => False,
+          INV        => False,
+          HIZ1       => False,
+          DRV        => False,
+          HYSTEN     => False,
+          INENA      => False,
+          PIPU       => False,
+          PIPD       => False,
+          WAKESTAT   => False,
+          PC         => True,
+          PF         => 2);
 
       TIMG.RSTCTL := MSPM0.RSTCTL_RESET or 1;
       TIMG.PWREN := MSPM0.PWREN_ENABLE;
@@ -50,22 +59,27 @@ package body WS2812 is
       TIMG.LOAD := 40;
       TIMG.CC_0 := (CCVAL => CCVAL_0);
       TIMG.CCACT_0 :=
-         (LACT    => MSPM0.TIM.CCP_High,
-          CDACT   => MSPM0.TIM.CCP_Low,
-          ZACT    => MSPM0.TIM.CCP_Low,
-          others  => <>);
-      TIMG.CCPD.C0CCP0 := True;
+         (SWFRCACT_CMPL => 0,
+          SWFRCACT      => 0,
+          FEXACT        => 0,
+          FENACT        => 0,
+          CC2UACT       => MSPM0.TIM.Disabled,
+          CC2DACT       => MSPM0.TIM.Disabled,
+          CUACT         => MSPM0.TIM.Disabled,
+          CDACT         => MSPM0.TIM.CCP_Low,
+          LACT          => MSPM0.TIM.CCP_High,
+          ZACT          => MSPM0.TIM.CCP_Low);
+      TIMG.CCPD := (C0CCP0 => True, others => False);
       TIMG.OCTL_0 :=
          (CCPIV   => False,
           CCPOINV => False,
           CCPO    => 0);
-      TIMG.ODIS.C0CCP0 := False;
+      TIMG.ODIS := (C0CCP0 => False, others => True);
 
       --  Publish generic event channel 1 on LOAD
       TIMG.GEN_EVENT_0.IMASK := (L => True, others => False);
       TIMG.FPUB_0 := 1;
 
-      CCVAL := (others => (others => 0));
       TIMG.CTR := (CCTR => 0);
    end Init_TIMG;
 

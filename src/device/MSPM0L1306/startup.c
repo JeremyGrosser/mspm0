@@ -54,8 +54,6 @@ typedef void( *pFunc )( void );
 void Default_Handler(void);
 extern void Reset_Handler       (void) __attribute__((weak));
 extern void __libc_init_array(void);
-extern void _init               (void) __attribute__((weak, alias("initStub")));
-void initStub(void){;}
 
 /* Processor Exceptions */
 extern void NMI_Handler         (void) __attribute__((weak, alias("Default_Handler")));
