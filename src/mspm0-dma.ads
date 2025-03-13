@@ -119,7 +119,7 @@ is
       CPU_INT     at 16#1020# range 0 .. 351;
       GEN_EVENT   at 16#1050# range 0 .. 351;
       DMATCTL     at 16#1110# range 0 .. 511;
-      CH       at 16#1200# range 0 .. 2047;
+      CH          at 16#1200# range 0 .. 2047;
    end record;
 
 end MSPM0.DMA;

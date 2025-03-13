@@ -116,6 +116,18 @@ is
       PCNT at 0 range 0 .. 7;
    end record;
 
+   type CTTRIGCTL_Register is record
+      EVTCTTRIGSEL   : UInt4 := 0;
+      EVTCTEN        : Boolean := False;
+      CTEN           : Boolean := False;
+   end record
+      with Volatile_Full_Access, Effective_Writes, Async_Readers, Object_Size => 32;
+   for CTTRIGCTL_Register use record
+      EVTCTTRIGSEL   at 0 range 16 .. 19;
+      EVTCTEN        at 0 range 1 .. 1;
+      CTEN           at 0 range 0 .. 0;
+   end record;
+
    type CTR_Register is record
       CCTR : UInt32;
    end record
@@ -274,6 +286,7 @@ is
       ODIS        : ODIS_Register;
       CCLKCTL     : CCLKCTL_Register;
       CPS         : CPS_Register;
+      CTTRIGCTL   : CTTRIGCTL_Register;
       CTR         : CTR_Register;
       CTRCTL      : CTRCTL_Register;
       LOAD        : UInt32;
@@ -318,6 +331,7 @@ is
       ODIS        at 16#1104# range 0 .. 31;
       CCLKCTL     at 16#1108# range 0 .. 31;
       CPS         at 16#110C# range 0 .. 31;
+      CTTRIGCTL   at 16#1114# range 0 .. 31;
       CTR         at 16#1800# range 0 .. 31;
       CTRCTL      at 16#1804# range 0 .. 31;
       LOAD        at 16#1808# range 0 .. 31;
