@@ -214,9 +214,6 @@ void Default_Handler(void)
     // ensure all memory writes are complete
     __asm volatile("dsb");
 
-    // break if a debugger is attached 
-    __asm volatile("bkpt #1");  
-
     // reset
     SCB_AIRCR = SCB_AIRCR_VECTKEY | SCB_AIRCR_SYSRESETREQ;
 
