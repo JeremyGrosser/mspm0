@@ -6,7 +6,7 @@
 with System;
 
 package MSPM0.DMA
-   with Preelaborate
+   with Pure
 is
    type Channel_Id is range 0 .. 15;
 
