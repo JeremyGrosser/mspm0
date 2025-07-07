@@ -21,7 +21,7 @@ mspm0 = { path='..' }
 bare_runtime = { url='https://github.com/JeremyGrosser/bare_runtime.git', branch='no_semihosting' }
 
 [configuration.values]
-mspm0.Device = "MSPM0L1306"
+mspm0.Device = "MSPM0G3507"
 
 [gpr-set-externals]
 BARE_RUNTIME_SWITCHES = "-mcpu=cortex-m0plus"
