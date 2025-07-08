@@ -169,6 +169,14 @@ is
       EXCLKEN  at 0 range 0 .. 0;
    end record;
 
+   type PMODECFG_Register is record
+      DSLEEP : UInt2 := 0;
+   end record
+      with Volatile_Full_Access, Effective_Writes, Async_Readers, Object_Size => 32;
+   for PMODECFG_Register use record
+      DSLEEP at 0 range 0 .. 1;
+   end record;
+
    type CLKSTATUS_Register is record
       ANACLKERR      : Boolean;
       OPAMPCLKERR    : Boolean;
@@ -264,6 +272,7 @@ is
       SYSPLLPARAM1   : UInt32;
       GENCLKCFG      : GENCLKCFG_Register;
       GENCLKEN       : GENCLKEN_Register;
+      PMODECFG       : PMODECFG_Register;
       FCC            : UInt22;
       CLKSTATUS      : CLKSTATUS_Register;
       SYSOSCFCLCTL   : SYSOSCFCLCTL_Register;
@@ -284,6 +293,7 @@ is
       SYSPLLPARAM1   at 16#112C# range 0 .. 31;
       GENCLKCFG      at 16#1138# range 0 .. 31;
       GENCLKEN       at 16#113C# range 0 .. 31;
+      PMODECFG       at 16#1140# range 0 .. 31;
       FCC            at 16#1150# range 0 .. 21;
       CLKSTATUS      at 16#1204# range 0 .. 31;
       SYSOSCFCLCTL   at 16#1310# range 0 .. 31;
