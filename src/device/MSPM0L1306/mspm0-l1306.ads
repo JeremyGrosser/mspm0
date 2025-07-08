@@ -14,6 +14,7 @@ with MSPM0.TIM;
 with MSPM0.ADC;
 with MSPM0.VREF;
 with MSPM0.DMA;
+with MSPM0.SCB;
 
 package MSPM0.L1306
    with Preelaborate
@@ -48,6 +49,9 @@ is
       with Import, Address => System'To_Address (16#4000_4000#);
    VREF  : aliased MSPM0.VREF.VREF_Peripheral
       with Import, Address => System'To_Address (16#4003_0000#);
+
+   SCB : aliased MSPM0.SCB.SCB_Peripheral
+      with Import, Address => System'To_Address (16#E000_ED00#);
 
    package Mux is
       PA0 : constant := 1;
