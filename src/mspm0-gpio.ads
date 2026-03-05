@@ -55,6 +55,7 @@ is
       DIN         : GPIO_Bit_Array;
       POLARITY    : POLARITY_Array;
       FILTEREN    : FILTEREN_Array;
+      DMAMASK     : GPIO_Bit_Array;
    end record
       with Volatile, Effective_Writes, Async_Readers, Async_Writers;
 
@@ -76,6 +77,7 @@ is
       DIN         at 16#1380# range 0 .. 31;
       POLARITY    at 16#1390# range 0 .. 63;
       FILTEREN    at 16#1508# range 0 .. 63;
+      DMAMASK     at 16#1510# range 0 .. 31;
    end record;
 
    type PINCM_Register is record

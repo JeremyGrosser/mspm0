@@ -11,11 +11,11 @@ with MSPM0.NVIC;
 with MSPM0.GPIO;
 
 procedure Main is
-   PASS_LED : constant := 27;
+   PASS_LED : constant := 25;
    FAIL_LED : constant := 26;
    LED_Mask : constant MSPM0.GPIO.GPIO_Bit_Array :=
       (PASS_LED => True, FAIL_LED => True, others => False);
-   PASS_LED_Mux : constant := Mux.PB27;
+   PASS_LED_Mux : constant := Mux.PB25;
    FAIL_LED_Mux : constant := Mux.PB26;
 begin
    --  Configure LED pins, FAIL on while starting

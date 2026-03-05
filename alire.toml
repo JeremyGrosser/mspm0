@@ -10,4 +10,4 @@ website = ""
 tags = []
 
 [configuration.variables]
-Device = {type = "Enum", values = ["MSPM0G3507", "MSPM0L1306"], default="MSPM0G3507"}
+Device = {type = "Enum", values = ["MSPM0G3507", "MSPM0L1306", "MSPM0G5187"], default="MSPM0G3507"}
