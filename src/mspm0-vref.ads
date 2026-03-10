@@ -7,20 +7,36 @@ package MSPM0.VREF
    with Pure
 is
    type CTL0_Register is record
-      SHMODE            : Boolean := False;
-      BUFCONFIG         : Boolean := False;
-      COMP_VREF_ENABLE  : Boolean := False;
-      ENABLE            : Boolean := False;
+      SHMODE      : Boolean := False;
+      BUFCONFIG   : Boolean := False;
+      ENABLE2     : Boolean := False;
+      ENABLE1     : Boolean := False;
+      ENABLE0     : Boolean := False;
    end record
       with Volatile_Full_Access,
            Effective_Writes,
            Async_Readers,
            Object_Size => 32;
    for CTL0_Register use record
-      SHMODE            at 0 range 8 .. 8;
-      BUFCONFIG         at 0 range 7 .. 7;
-      COMP_VREF_ENABLE  at 0 range 1 .. 1;
-      ENABLE            at 0 range 0 .. 0;
+      SHMODE      at 0 range 8 .. 8;
+      BUFCONFIG   at 0 range 7 .. 7;
+      ENABLE2     at 0 range 2 .. 2;
+      ENABLE1     at 0 range 1 .. 1;
+      ENABLE0     at 0 range 0 .. 0;
+   end record;
+
+   type CTL1_Register is record
+      ENABLE2 : Boolean := False;
+      ENABLE1 : Boolean := False;
+      ENABLE0 : Boolean := False;
+   end record
+      with Volatile_Full_Access,
+           Async_Writers,
+           Object_Size => 32;
+   for CTL1_Register use record
+      ENABLE2 at 0 range 2 .. 2;
+      ENABLE1 at 0 range 1 .. 1;
+      ENABLE0 at 0 range 0 .. 0;
    end record;
 
    type CTL2_Register is record
@@ -42,7 +58,7 @@ is
       CLKDIV   : UInt32;
       CLKSEL   : CLKSEL_Register;
       CTL0     : CTL0_Register;
-      CTL1     : UInt32;
+      CTL1     : CTL1_Register;
       CTL2     : CTL2_Register;
    end record
       with Volatile,

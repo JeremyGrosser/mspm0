@@ -12,6 +12,8 @@ with MSPM0.GPIO;
 with MSPM0.UART;
 with MSPM0.TIM;
 with MSPM0.ADC;
+with MSPM0.COMP;
+with MSPM0.OPA;
 with MSPM0.VREF;
 with MSPM0.DMA;
 with MSPM0.SCB;
@@ -19,22 +21,22 @@ with MSPM0.SCB;
 package MSPM0.L1306
    with Preelaborate
 is
-   SYSCTL   : aliased MSPM0.SYSCTL.SYSCTL_Peripheral
+   SYSCTL : aliased MSPM0.SYSCTL.SYSCTL_Peripheral
       with Import, Address => System'To_Address (16#400A_F000#);
-   PA       : aliased MSPM0.GPIO.GPIO_Peripheral
+   PA    : aliased MSPM0.GPIO.GPIO_Peripheral
       with Import, Address => System'To_Address (16#400A_0000#);
-   PINCM    : aliased MSPM0.GPIO.PINCM_Array
+   PINCM : aliased MSPM0.GPIO.PINCM_Array
       with Import, Address => System'To_Address (16#4042_8004#);
-   WWDT0    : aliased MSPM0.WWDT.WWDT_Peripheral
+   WWDT0 : aliased MSPM0.WWDT.WWDT_Peripheral
       with Import, Address => System'To_Address (16#4008_0000#);
-   CPUSS    : aliased MSPM0.CPUSS.CPUSS_Peripheral
+   CPUSS : aliased MSPM0.CPUSS.CPUSS_Peripheral
       with Import, Address => System'To_Address (16#4040_0000#);
-   DMA      : aliased MSPM0.DMA.DMA_Peripheral
+   DMA   : aliased MSPM0.DMA.DMA_Peripheral
       with Import, Address => System'To_Address (16#4042_A000#);
 
-   UART_0 : aliased MSPM0.UART.UART_Peripheral
+   UART0 : aliased MSPM0.UART.UART_Peripheral
       with Import, Address => System'To_Address (16#4010_8000#);
-   UART_1 : aliased MSPM0.UART.UART_Peripheral
+   UART1 : aliased MSPM0.UART.UART_Peripheral
       with Import, Address => System'To_Address (16#4010_0000#);
 
    TIMG0 : aliased MSPM0.TIM.TIM_Peripheral
@@ -47,10 +49,16 @@ is
       with Import, Address => System'To_Address (16#4008_C000#);
    ADC0  : aliased MSPM0.ADC.ADC_Peripheral
       with Import, Address => System'To_Address (16#4000_4000#);
+   COMP0 : aliased MSPM0.COMP.COMP_Peripheral
+      with Import, Address => System'To_Address (16#4000_8000#);
+   OPA0  : aliased MSPM0.OPA.OPA_Peripheral
+      with Import, Address => System'To_Address (16#4002_0000#);
+   OPA1  : aliased MSPM0.OPA.OPA_Peripheral
+      with Import, Address => System'To_Address (16#4002_2000#);
    VREF  : aliased MSPM0.VREF.VREF_Peripheral
       with Import, Address => System'To_Address (16#4003_0000#);
 
-   SCB : aliased MSPM0.SCB.SCB_Peripheral
+   SCB   : aliased MSPM0.SCB.SCB_Peripheral
       with Import, Address => System'To_Address (16#E000_ED00#);
 
    package Mux is
