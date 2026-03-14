@@ -13,6 +13,7 @@ with MSPM0.TIM;
 with MSPM0.ADC;
 with MSPM0.VREF;
 with MSPM0.DMA;
+with MSPM0.USBFS;
 
 package MSPM0.G5187
    with Preelaborate
@@ -37,6 +38,8 @@ is
       with Import, Address => System'To_Address (16#4003_0000#);
    DMA      : aliased MSPM0.DMA.DMA_Peripheral
       with Import, Address => System'To_Address (16#4042_A000#);
+   USBFS    : aliased MSPM0.USBFS.USBFS_Peripheral
+      with Import, Address => System'To_Address (16#4047_F000#);
 
    TIMA0 : aliased MSPM0.TIM.TIM_Peripheral
       with Import, Address => System'To_Address (16#4086_0000#);

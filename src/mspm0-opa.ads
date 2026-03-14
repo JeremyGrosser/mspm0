@@ -10,7 +10,10 @@ is
       OUTPIN   : Boolean := False;
       CHOP     : UInt2 := 0;
    end record
-      with Volatile_Full_Access, Effective_Writes, Async_Readers, Object_Size => 32;
+      with Volatile_Full_Access,
+           Effective_Writes,
+           Async_Readers,
+           Object_Size => 32;
    for CFG_Register use record
       GAIN     at 0 range 13 .. 15;
       MSEL     at 0 range 10 .. 12;
