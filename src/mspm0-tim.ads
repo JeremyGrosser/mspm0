@@ -128,11 +128,6 @@ is
       CTEN           at 0 range 0 .. 0;
    end record;
 
-   type CTR_Register is record
-      CCTR : UInt32;
-   end record
-      with Volatile_Full_Access, Effective_Writes, Async_Readers, Async_Writers, Object_Size => 32;
-
    type CTRCTL_Register is record
       CVAE        : UInt2 := 0;
       PLEN        : Boolean := False;
@@ -287,7 +282,7 @@ is
       CCLKCTL     : CCLKCTL_Register;
       CPS         : CPS_Register;
       CTTRIGCTL   : CTTRIGCTL_Register;
-      CTR         : CTR_Register;
+      CTR         : UInt32;
       CTRCTL      : CTRCTL_Register;
       LOAD        : UInt32;
       CC_0        : CC_Register;

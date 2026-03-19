@@ -25,20 +25,6 @@ is
       ENABLE0     at 0 range 0 .. 0;
    end record;
 
-   type CTL1_Register is record
-      ENABLE2 : Boolean := False;
-      ENABLE1 : Boolean := False;
-      ENABLE0 : Boolean := False;
-   end record
-      with Volatile_Full_Access,
-           Async_Writers,
-           Object_Size => 32;
-   for CTL1_Register use record
-      ENABLE2 at 0 range 2 .. 2;
-      ENABLE1 at 0 range 1 .. 1;
-      ENABLE0 at 0 range 0 .. 0;
-   end record;
-
    type CTL2_Register is record
       HCYCLE   : UInt16 := 0;
       SHCYCLE  : UInt16 := 0;
@@ -58,7 +44,7 @@ is
       CLKDIV   : UInt32;
       CLKSEL   : CLKSEL_Register;
       CTL0     : CTL0_Register;
-      CTL1     : CTL1_Register;
+      CTL1     : UInt32;
       CTL2     : CTL2_Register;
    end record
       with Volatile,
