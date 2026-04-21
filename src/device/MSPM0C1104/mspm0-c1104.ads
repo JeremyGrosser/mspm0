@@ -10,6 +10,7 @@ with MSPM0.WWDT;
 with MSPM0.CPUSS;
 with MSPM0.GPIO;
 with MSPM0.UART;
+with MSPM0.SPI;
 with MSPM0.TIM;
 with MSPM0.ADC;
 with MSPM0.VREF;
@@ -34,6 +35,8 @@ is
 
    UART0 : aliased MSPM0.UART.UART_Peripheral
       with Import, Address => System'To_Address (16#4010_8000#);
+   SPI0  : aliased MSPM0.SPI.SPI_Peripheral
+      with Import, Address => System'To_Address (16#4046_8000#);
 
    TIMG14 : aliased MSPM0.TIM.TIM_Peripheral
       with Import, Address => System'To_Address (16#4008_4000#);
