@@ -12,8 +12,6 @@ with MSPM0.GPIO;
 with MSPM0.UART;
 with MSPM0.TIM;
 with MSPM0.ADC;
-with MSPM0.COMP;
-with MSPM0.OPA;
 with MSPM0.VREF;
 with MSPM0.DMA;
 with MSPM0.SCB;
