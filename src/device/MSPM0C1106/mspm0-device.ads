@@ -1,0 +1,7 @@
+--
+--  Copyright (C) 2026 Jeremy Grosser <jeremy@synack.me>
+--
+--  SPDX-License-Identifier: BSD-3-Clause
+--
+with MSPM0.C1106;
+package MSPM0.Device renames MSPM0.C1106;
