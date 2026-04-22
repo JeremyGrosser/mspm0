@@ -1,3 +1,8 @@
+--
+--  Copyright (C) 2026 Jeremy Grosser <jeremy@synack.me>
+--
+--  SPDX-License-Identifier: BSD-3-Clause
+--
 package MSPM0.OPA
    with Pure
 is
